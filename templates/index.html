@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>歌曲推薦系統</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .container { max-width: 600px; margin: auto; }
+        .output-box { width: 100%; height: 160px; margin-bottom: 20px; font-size: 16px; }
+        .select-group { display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px; }
+        .select-label { font-weight: bold; margin-bottom: 3px; }
+        .btn-group { display: flex; gap: 20px; margin-bottom: 20px; }
+        select, button { font-size: 16px; padding: 6px 12px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>歌曲推薦系統</h2>
+        <!-- 文字輸出框 -->
+        <textarea class="output-box" id="output-box" readonly>請選擇條件查詢歌曲</textarea>
+        <!-- 三個下拉式選單 -->
+        <div class="select-group">
+            <div>
+                <div class="select-label">心情</div>
+                <select id="mood">
+                    <option value="">載入中...</option>
+                </select>
+            </div>
+            <div>
+                <div class="select-label">時段</div>
+                <select id="time">
+                    <option value="">載入中...</option>
+                </select>
+            </div>
+            <div>
+                <div class="select-label">活動</div>
+                <select id="activity">
+                    <option value="">載入中...</option>
+                </select>
+            </div>
+        </div>
+        <!-- 兩個按鈕 -->
+        <div class="btn-group">
+            <button type="button" id="recommend-btn">推薦</button>
+            <button type="button" id="exit-btn">結束</button>
+        </div>
+        <div style="color: #b00; font-size: 15px; margin-bottom: 20px;">
+            若是沒有打開正確數量的網頁，請回到本網頁並允許網頁打開多個網頁。
+        </div>
+    </div>
+    <script src="/static/scripts.js"></script>
+</body>
+</html>
