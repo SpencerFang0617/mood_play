@@ -1,30 +1,27 @@
 
 # 定義三個分類字典
 moods = {
-    "快樂": "0", "難過": "1", "憤怒": "2", "放鬆": "3",
-    "焦慮": "4", "愛戀": "5", "無聊": "6", "興奮": "7"
+    "Joyful": "0", "Melancholic": "1", "Mysterious": "2", "Nostalgic": "3",
+    "Romantic": "4"
 }
 
 times = {
-    "上午": "0", "中午": "1", "下午": "2",
-    "傍晚": "3", "夜晚": "4", "凌晨": "5"
+    "Morning": "0", "Afternoon": "1", "Evening": "2",
+    "Night": "3"
 }
-
 events = {
-    "跑步": "0", "派對": "1", "讀書": "2", "放空": "3", "工作": "4",
-    "約會": "5", "冥想": "6", "旅行": "7", "開車": "8", "運動": "9"
+    "Commuting": "0", "Cooking": "1", "Date": "2", "Exercising": "3", "Jornaling": "4",
+    "Reflecting": "5", "Relaxing": "6"
 }
 
-# 模擬歌曲資料庫（編號為「心情時段活動」的代碼）
-songs_db = {
-    "011": ["Dancing Queen - ABBA", "Uptown Funk - Bruno Mars"],
-    "345": ["Lovely - Billie Eilish", "Someone You Loved - Lewis Capaldi"],
-    "712": ["Blinding Lights - The Weeknd"],
-    "004": ["Happy - Pharrell Williams"],
-    "132": ["Shivers - Ed Sheeran"],
-    "123": ["Stay - The Kid LAROI, Justin Bieber"],
-    # ...可以持續擴充
-}
+# 模擬歌曲資料庫（匯入"D:\Github\mood_play\music_1000_with_links_dict_modify.csv"）
+import pandas as pd
+
+# 讀取CSV文件
+df = pd.read_csv("D:/Github/mood_play/music_1000_with_links_dict_modify.csv")
+
+# 將歌曲資料庫轉換為字典
+songs_db = df.set_index('key')['titles'].to_dict()
 
 # 提示用戶輸入
 print("請從以下選項輸入對應的詞：")
@@ -42,13 +39,15 @@ if n1 not in moods or n2 not in times or n3 not in events:
     print("輸入有誤,請重新啟動程式並確認拼字正確。")
 else:
     # 將輸入轉成代碼
-    list_1 = [moods[n1], times[n2], events[n3]]
-    code = "".join(list_1)
+    int_1 = int(str(moods[n1])+ str(times[n2])+ str(events[n3]))
+    print(type(int_1))
+    print(int_1)
 
     # 顯示推薦歌單
-    if code in songs_db:
+    if int_1 in songs_db:
         print("\n根據你的選擇,為你推薦以下歌單：")
-        for song in songs_db[code]:
-            print(song)
+        list_1 = songs_db[int_1].split(";")
+        for i in range(len(list_1)):
+            print(list_1[i])
     else:
         print("\n很抱歉,目前尚未有符合此組合的歌單,歡迎日後再來看看！")
