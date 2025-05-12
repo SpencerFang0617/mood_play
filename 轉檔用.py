@@ -42,7 +42,7 @@ activity_map = {
     'relaxing': 6
 }
 
-# 以三位數 key 組成新的 dict，值為歌名 list
+# 以三位數 key 組成新的 dict，值為"titles"+"-"+"artist"+"-"+"youtube_link" 的list
 result_dict = {}
 for song_id, row in music_df.iterrows():
     mood_num = mood_map.get(str(row['mood']).capitalize(), -1)
@@ -51,13 +51,13 @@ for song_id, row in music_df.iterrows():
     key = f"{mood_num}{time_num}{activity_num}"
     if key not in result_dict:
         result_dict[key] = []
-    result_dict[key].append(row['title'])
+    result_dict[key].append(row['title']+"-"+row['artist']+"-"+row['youtube_link'])
 
 print(result_dict)
 
 # 將結果輸出為 csv，每一列為 key, titles
 with open(r"D:\Github\mood_play\music_1000_with_links_dict_modify.csv", "w", newline='', encoding='utf-8') as f:
     writer = csv.writer(f)
-    writer.writerow(["key", "titles"])
+    writer.writerow(["key", "titles"+"-"+"artist"+"-"+"youtube_link"])
     for key, titles in result_dict.items():
         writer.writerow([key, ";".join(titles)])  # 用分號分隔所有歌名
