@@ -76,7 +76,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 geminiVibeOutput.style.display = 'none';
             }
 
-
+            // --- 修改開始：在發起請求前先關閉側邊欄 ---
+            if (sidebar) {
+                sidebar.classList.remove('active');
+                // 使用 requestAnimationFrame 給予關閉動畫一點時間
+                requestAnimationFrame(() => {
+                    proceedWithRecommendation();
+                });
+            } else {
+                proceedWithRecommendation();
+            }
+            // --- 修改結束 ---
+            
             fetch('/suggest', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -142,6 +153,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         // --- 修改結束 ---
                         if (songPlaylist) songPlaylist.appendChild(listItem);
                     });
+
+                    // --- 修改開始：在填充完列表後再開啟側邊欄 ---
+                    if (sidebar) {
+                        // 確保在 DOM 更新後再添加 active class，給予渲染機會
+                        requestAnimationFrame(() => {
+                            sidebar.classList.add('active');
+                        });
+                    }
+                    // --- 修改結束 ---
                     
                     // 自動在新分頁開啟所有推薦歌曲的連結
                     if (data.songs && data.songs.length > 0) {
