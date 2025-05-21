@@ -1,9 +1,8 @@
 import pandas as pd
 from flask import Flask, request, jsonify, render_template
 import threading
-import os
-import signal
 import time
+import os
 
 # --- 核心數據字典 ---
 # 這些字典的鍵 (keys) 必須與前端下拉選單的選項一致。
@@ -50,7 +49,7 @@ events = {
 }
 
 # --- 數據庫加載 ---
-CSV_FILE_PATH = "music_1000_with_links_dict_modify.csv"
+CSV_FILE_PATH = os.path.join(os.path.dirname(__file__), "music_1000_with_links_dict_modify.csv")
 try:
     df = pd.read_csv(CSV_FILE_PATH)
     # CSV 中的 'key' 欄位是整數，用於索引
