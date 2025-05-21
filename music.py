@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify, render_template
 import threading
 import os
 import signal
+import time
 
 # --- 核心數據字典 ---
 # 這些字典的鍵 (keys) 必須與前端下拉選單的選項一致。
@@ -149,6 +150,7 @@ def dicts_route():
 
 @app.route('/suggest', methods=['POST'])
 def suggest_route():
+    time.sleep(0.5)
     data = request.get_json()
     if not data:
         return jsonify({'success': False, 'message': '請求中未包含有效的 JSON 數據。'}), 400
