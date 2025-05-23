@@ -216,4 +216,4 @@ def exit_route():
 if __name__ == '__main__':
     # 監聽所有網絡接口 (0.0.0.0)，方便在局域網內訪問測試
     # debug=True 在生產環境中應設為 False
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=False, host='0.0.0.0', port=5000)
