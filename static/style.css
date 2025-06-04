@@ -1,0 +1,379 @@
+/* static/style.css 或 <style> 標籤內 */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 與原先保持一致或選擇更現代的字體 */
+    margin: 0;
+    padding: 20px; /* 給整個頁面一些邊距 */
+    background-color: #f0f2f5; /* 淺灰色背景，或圖片中的白色背景 #FFFFFF */
+    display: flex;
+    flex-direction: column; /* 主內容區和側邊欄上下排列，或者你可以調整回左右 */
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+    overflow-x: hidden; /* 防止水平滾動 */
+}
+
+.moodplay-container {
+    background-color: #ffffff; /* 主容器背景色 */
+    padding: 30px 40px;
+    border-radius: 20px; /* 更大的圓角 */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* 更明顯的陰影 */
+    width: 100%;
+    max-width: 700px; /* 稍微加寬以容納新佈局 */
+    text-align: center;
+    margin-bottom: 20px; /* 與側邊欄的間距 */
+}
+
+.moodplay-header {
+    margin-bottom: 30px;
+}
+
+.moodplay-header h1 {
+    font-size: 48px; /* 大號標題 */
+    font-weight: bold;
+    color: #333; /* 深色文字 */
+    margin: 0 0 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.moodplay-header .play-icon {
+    color: #8A2BE2; /* 紫色系，或圖片中的黑色 */
+    font-size: 0.8em; /* 相對於 h1 的大小 */
+    margin: 0 5px 0 0;
+    transform: translateY(-2px); /* 微調播放圖標位置 */
+}
+
+.moodplay-header .subtitle {
+    font-size: 18px;
+    color: #666;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.moodplay-header .headphone-icon {
+    font-size: 1.2em;
+    margin-right: 8px;
+    transform: translateY(-1px);
+    color: #777;
+}
+
+/* 動態音樂調 */
+.music-visualizer-wrapper {
+    height: 80px; /* 音樂調的高度 */
+    background: linear-gradient(90deg, #8A2BE2, #FF69B4, #FFA500); /* 紫到粉到橙的漸變 */
+    border-radius: 40px; /* 非常圓的角 */
+    margin: 0 auto 30px auto; /* 上方，居中，與下方控件的距離 */
+    padding: 10px 20px; /* 內部留白 */
+    display: flex;
+    align-items: center; /* 保持垂直居中對齊條形組 */
+    justify-content: center; /* 改為 center 使條形組水平居中 */
+    position: relative; /* 用於定位中間線和搜索圖標 */
+    overflow: hidden; /* 確保內容不溢出圓角 */
+}
+
+.music-visualizer {
+    display: flex;
+    align-items: flex-end; /* 條從底部開始 */
+    height: 100%; /* 佔滿父容器高度 */
+    width: calc(100% - 40px); /* 減去搜索圖標的寬度 */
+    position: relative;
+    z-index: 1;
+}
+
+.visualizer-bar {
+    width: 12px; /* 調整寬度以適應30條bar */
+    /*background-color: linear-gradient(45deg, rgba(59, 245, 3, 0.7), rgba(3, 76, 245, 0.7));  45度角漸層 */
+    background-color: rgba(255, 255, 255, 0.6); /* 半透明白色 */
+    margin: 6px; /* 更新間距：左右各9px，總間距18px */
+    border-radius: 3px; /* 條的圓角 */
+    animation-name: dance;
+    animation-duration: 1.5s; /* 動畫時長 */
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    transform-origin: bottom;
+}
+
+/* 為每個 bar 設置不同的高度和動畫延遲 */
+.visualizer-bar:nth-child(odd) { animation-duration: 1.2s; }
+.visualizer-bar:nth-child(even) { animation-duration: 1.8s; }
+.visualizer-bar:nth-child(3n) { animation-duration: 1s; }
+.visualizer-bar:nth-child(1) { height: 60%; animation-delay: 0.1s; }
+.visualizer-bar:nth-child(2) { height: 80%; animation-delay: 0.2s; }
+.visualizer-bar:nth-child(3) { height: 50%; animation-delay: 0.3s; }
+.visualizer-bar:nth-child(4) { height: 70%; animation-delay: 0.4s; }
+.visualizer-bar:nth-child(5) { height: 90%; animation-delay: 0.0s; }
+.visualizer-bar:nth-child(6) { height: 60%; animation-delay: 0.15s; }
+.visualizer-bar:nth-child(7) { height: 75%; animation-delay: 0.25s; }
+.visualizer-bar:nth-child(8) { height: 55%; animation-delay: 0.35s; }
+.visualizer-bar:nth-child(9) { height: 85%; animation-delay: 0.05s; }
+.visualizer-bar:nth-child(10) { height: 65%; animation-delay: 0.12s; }
+.visualizer-bar:nth-child(11) { height: 70%; animation-delay: 0.22s; }
+.visualizer-bar:nth-child(12) { height: 90%; animation-delay: 0.32s; }
+.visualizer-bar:nth-child(13) { height: 50%; animation-delay: 0.42s; }
+.visualizer-bar:nth-child(14) { height: 75%; animation-delay: 0.08s; }
+.visualizer-bar:nth-child(15) { height: 60%; animation-delay: 0.18s; }
+.visualizer-bar:nth-child(16) { height: 80%; animation-delay: 0.28s; }
+.visualizer-bar:nth-child(17) { height: 55%; animation-delay: 0.38s; }
+.visualizer-bar:nth-child(18) { height: 70%; animation-delay: 0.03s; }
+.visualizer-bar:nth-child(19) { height: 85%; animation-delay: 0.13s; }
+.visualizer-bar:nth-child(20) { height: 65%; animation-delay: 0.23s; }
+.visualizer-bar:nth-child(21) { height: 65%; animation-delay: 0.12s; }
+.visualizer-bar:nth-child(22) { height: 70%; animation-delay: 0.22s; }
+.visualizer-bar:nth-child(23) { height: 90%; animation-delay: 0.32s; }
+.visualizer-bar:nth-child(24) { height: 50%; animation-delay: 0.42s; }
+.visualizer-bar:nth-child(25) { height: 75%; animation-delay: 0.08s; }
+.visualizer-bar:nth-child(26) { height: 60%; animation-delay: 0.18s; }
+.visualizer-bar:nth-child(27) { height: 80%; animation-delay: 0.28s; }
+.visualizer-bar:nth-child(28) { height: 55%; animation-delay: 0.38s; }
+.visualizer-bar:nth-child(29) { height: 70%; animation-delay: 0.03s; }
+.visualizer-bar:nth-child(30) { height: 85%; animation-delay: 0.13s; }
+
+@keyframes dance {
+  0%, 100% { transform: scaleY(0.1); }
+  50% { transform: scaleY(1); }
+}
+
+.search-icon-wrapper {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+.search-icon-wrapper img {
+    width: 24px; /* 搜索圖標大小 */
+    height: 24px;
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(200%) contrast(100%); /* 讓圖標變白色 */
+}
+
+.center-line {
+    position: absolute;
+    left: 50%;
+    top: 10%; /* 離頂部一點距離 */
+    bottom: 10%; /* 離底部一點距離 */
+    width: 4px; /* 線的寬度 */
+    background-color: #FFD700; /* 黃色 */
+    border-radius: 2px;
+    transform: translateX(-50%);
+    z-index: 0; /* 在bar後面，但在背景之上 */
+}
+
+
+/* 下拉選單區域 */
+.controls-wrapper {
+    margin-top: 20px;
+}
+
+.select-group-styled {
+    display: flex;
+    justify-content: space-around; /* 平均分佈 */
+    gap: 20px; /* 選單之間的間距 */
+    margin-bottom: 30px;
+}
+
+.select-control {
+    flex: 1; /* 每個選單佔用均等空間 */
+    text-align: left;
+}
+
+.select-label-styled {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-size: 14px; /* 標籤字體大小 */
+}
+
+.styled-select {
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 15px; /* 增加 padding */
+    border: 1px solid #ddd; /* 淺色邊框 */
+    border-radius: 25px; /* 類似按鈕的圓角 */
+    box-sizing: border-box;
+    background: linear-gradient(45deg, #f2f2f2, #e6e6e6); /* 淺灰漸變背景 */
+    color: #333;
+    appearance: none; /* 移除默認箭頭 */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23555555' viewBox='0 0 256 256'%3E%3Cpath d='M205.66,77.66l-72,72a8,8,0,0,1-11.32,0l-72-72a8,8,0,0,1,11.32-11.32L128,132.69l66.34-66.35a8,8,0,0,1,11.32,11.32Z'%3E%3C/path%3E%3C/svg%3E"); /* 自定義箭頭 */
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.styled-select:hover {
+    border-color: #8A2BE2;
+    box-shadow: 0 0 8px rgba(138, 43, 226, 0.3);
+}
+
+.styled-select:focus {
+    border-color: #FF69B4;
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+}
+
+/* 文本輸出框 */
+.output-box-styled {
+    width: calc(100% - 40px); /* 左右留些 padding */
+    height: 100px; /* 略微減小高度 */
+    margin-bottom: 25px;
+    font-size: 15px;
+    border: 1px solid #dfe6e9;
+    border-radius: 10px; /* 適度圓角 */
+    padding: 15px;
+    box-sizing: border-box;
+    background-color: #f8f9fa;
+    color: #555;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+/* 按鈕組 */
+.btn-group-styled {
+    display: flex;
+    gap: 20px; /* 按鈕間距 */
+    margin-bottom: 25px;
+    justify-content: center;
+}
+
+.styled-button {
+    font-size: 16px;
+    padding: 12px 25px; /* 調整 padding */
+    border: none;
+    border-radius: 25px; /* 圓角按鈕 */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.styled-button.recommend {
+    background: linear-gradient(45deg, #8A2BE2, #FF69B4); /* 紫色到粉色漸變 */
+    box-shadow: 0 4px 10px rgba(138, 43, 226, 0.3);
+}
+.styled-button.recommend:hover {
+    background: linear-gradient(45deg, #7925c8, #ec58a3); /* 加深漸變 */
+    box-shadow: 0 6px 15px rgba(138, 43, 226, 0.4);
+    transform: translateY(-2px);
+}
+
+.styled-button.exit {
+    background: linear-gradient(45deg, #FFA500, #FFC107); /* 橙色到黃色漸變 */
+    box-shadow: 0 4px 10px rgba(255, 165, 0, 0.3);
+}
+.styled-button.exit:hover {
+    background: linear-gradient(45deg, #e69500, #f5b700); /* 加深漸變 */
+    box-shadow: 0 6px 15px rgba(255, 165, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+/* 警告文字 */
+.warning-text-styled {
+    color: #c0392b;
+    font-size: 13px;
+    margin-bottom: 0; /* 因為是最後一個元素 */
+    background-color: #fef2f2;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #fecaca;
+}
+
+/* 側邊欄樣式 (可以從你原有的 index.html 中提取並美化) */
+.sidebar {
+    /* width: 0; /* 初始隱藏 */ /* Let's use the new fixed right position approach */
+    background-color: #ffffff;
+    padding: 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    /* transition: width 0.5s ease-in-out, padding 0.5s ease-in-out, margin-left 0.5s ease-in-out; */ /* Old transition */
+    height: calc(100vh - 120px); /* 假設 moodplay-container 的高度差不多 100px + body padding */
+    max-height: 500px; /* 調整最大高度 */
+    display: flex;
+    flex-direction: column;
+    /* margin-left: 0; */ /* Not needed with fixed positioning */
+    /* 你可能需要調整 .main-wrapper 的佈局，如果還想保留側邊欄在右側滑出的話 */
+    /* 以下是假設 sidebar 仍像之前一樣在右側 */
+    position: fixed; /* 或者 absolute，取決於佈局 */
+    right: -420px; /* 初始完全隱藏在右邊 (380px width + 2*20px padding) */
+    top: 20px; /* 與 body padding 匹配 */
+    width: 380px; /* 固定寬度 */
+    transition: right 0.5s ease-in-out, padding 0.5s ease-in-out;
+    z-index: 100;
+}
+
+.sidebar.active {
+    right: 20px; /* 滑出到可見位置 */
+    padding: 20px;
+    /* width: 380px; /* 已在上面設置 */
+}
+
+.recommendation-intro-text {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    padding: 8px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+#song-playlist-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #fdfdfd; /* 淺色背景 */
+}
+
+#song-playlist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#song-playlist li {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    font-size: 14px;
+    color: #34495e;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    word-break: break-all;
+}
+
+#song-playlist li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+#song-playlist li:hover {
+    background: linear-gradient(45deg, #8A2BE2, #FF69B4); /* 懸停時也用漸變 */
+    color: white;
+}
+
+.spinner {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spinner-border .75s linear infinite;
+    vertical-align: text-bottom;
+}
+@keyframes spinner-border {
+    to { transform: rotate(360deg); }
+}
