@@ -69,13 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // 清空上一次的 AI 描述 (如果 Gemini 描述框存在)
-            const geminiVibeOutput = document.getElementById('gemini-vibe-output');
-            if (geminiVibeOutput) {
-                geminiVibeOutput.textContent = '';
-                geminiVibeOutput.style.display = 'none';
-            }
-
+           
             // --- 修改開始：在發起請求前先關閉側邊欄 ---
             if (sidebar) {
                 sidebar.classList.remove('active');
@@ -203,7 +197,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (exitBtn) {
         exitBtn.addEventListener('click', function() {
             if (outputBox) outputBox.value = "正在請求關閉伺服器...";
-            const geminiVibeBtn = document.getElementById('gemini-vibe-btn'); // 獲取 Gemini 按鈕
 
             fetch('/exit', { method: 'POST' })
                 .then(res => {
@@ -218,14 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (songPlaylist) songPlaylist.innerHTML = '';
                     if (recommendBtn) recommendBtn.disabled = true;
                     if (exitBtn) exitBtn.disabled = true;
-                    if (geminiVibeBtn) geminiVibeBtn.disabled = true; // 結束時也禁用 Gemini 按鈕
 
-                    // 清空 Gemini 輸出
-                    const geminiVibeOutput = document.getElementById('gemini-vibe-output');
-                    if (geminiVibeOutput) {
-                        geminiVibeOutput.textContent = '';
-                        geminiVibeOutput.style.display = 'none';
-                    }
                 })
                 .catch(error => {
                     console.error("結束伺服器失敗:", error);
