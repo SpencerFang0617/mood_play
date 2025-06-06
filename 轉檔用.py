@@ -2,13 +2,18 @@ import os
 import pandas as pd
 import csv
 
+# 獲取腳本所在的目錄
+script_dir = os.path.dirname(os.path.abspath(__file__))
+# 構建檔案路徑
+input_file_path = os.path.join(script_dir, "music_1000_with_links.csv")
+output_file_path = os.path.join(script_dir, "music_1000_with_links_dict_modify.csv")
+
 #把csv檔案中的資料轉為dataframe,以song_id為索引
 def csv_to_dataframe(file_path):
     df = pd.read_csv(file_path, index_col="song_id")
     return df
 
-#檔案路徑為"D:\Github\mood_play\music_1000_with_links.csv"
-music_df = csv_to_dataframe("D:\Github\mood_play\music_1000_with_links.csv")
+music_df = csv_to_dataframe(input_file_path)
 print(music_df)
 
 #將dataframe的資料以規則轉換為dict並以mood_map,time_map,activity_map組成的三位數為key
@@ -56,7 +61,7 @@ for song_id, row in music_df.iterrows():
 print(result_dict)
 
 # 將結果輸出為 csv，每一列為 key, titles
-with open(r"D:\Github\mood_play\music_1000_with_links_dict_modify.csv", "w", newline='', encoding='utf-8') as f:
+with open(output_file_path, "w", newline='', encoding='utf-8') as f:
     writer = csv.writer(f)
     writer.writerow(["key", "titles"+"-"+"artist"+"-"+"youtube_link"])
     for key, titles in result_dict.items():
